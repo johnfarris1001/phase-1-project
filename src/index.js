@@ -21,6 +21,10 @@ function renderDrink(drink) {
     const p = document.createElement('p')
     img.src = `${drink.strDrinkThumb}/preview`
     img.alt = 'Drink thumbnail'
+    img.id = 'drink-thumbnail'
+    img.addEventListener('mouseover', event => {
+        enlarge(event.toElement)
+    })
     h3.textContent = `${drink.strDrink} (${drink.strAlcoholic})`
     p.textContent = drink.strInstructions
     div.appendChild(img)
@@ -33,6 +37,12 @@ function renderDrink(drink) {
     div.appendChild(ing)
     div.appendChild(p)
 
+}
+
+function enlarge(element) {
+    const img = document.getElementById('drink-thumbnail')
+    console.log(img)
+    img.src = element.src.slice(0, -8)
 }
 
 function countIngredients(drink) {
