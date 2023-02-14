@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
             renderDrink(data.drinks[0])
         })
 
+    const hide = document.getElementById('hide')
+    hide.addEventListener('click', () => {
+        toggleRandomCocktail()
+    })
+
     const form = document.getElementById('form')
     form.addEventListener('submit', event => {
         event.preventDefault()
@@ -91,6 +96,19 @@ function countMeasures(drink) {
         drink.strMeasure10
     ]
     return meaArr.filter(n => n != null)
+}
+
+function toggleRandomCocktail() {
+    const randomCocktail = document.getElementById('random-cocktail')
+    const hideButton = document.getElementById('hide')
+    if (!randomCocktail.style.display) {
+        randomCocktail.style.display = 'none'
+        hideButton.textContent = 'Show Cocktail'
+    } else {
+        randomCocktail.style.display = ''
+        hideButton.textContent = 'Hide Cocktail'
+    }
+
 }
 
 function search(term) {
