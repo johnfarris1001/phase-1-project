@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(`${cocktailURL}random.php`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data.drinks[0])
             renderDrink(data.drinks[0])
         })
 
@@ -112,29 +111,34 @@ function toggleRandomCocktail() {
 }
 
 function search(term) {
-    console.log(term)
     let searchBy = ''
     if (!term.target[0].value) {
         alert('Please enter a search term')
     }
     else if (term.target[1].checked === true) {
         searchBy = 'name'
-        console.log(searchBy)
+        fetch(`${cocktailURL}search.php?s=${term.target[0].value}`)
+            .then(resp => resp.json())
+            .then(data => renderCocktailList(data))
 
     } else if (term.target[2].checked === true) {
         searchBy = 'ingredient'
-        console.log(searchBy)
         fetch(`${cocktailURL}filter.php?i=${term.target[0].value}`)
             .then(resp => resp.json())
             .then(data => renderCocktailList(data))
+            .catch(error => alert('No drinks with that ingredient!'))
     } else {
         alert('Please choose either Name or Ingredient')
     }
 }
 
 function renderCocktailList(list) {
-    console.log(list)
+    if (!list['drinks']) {
+        alert('No drinks by that name!')
+        return
+    }
     const listDiv = document.getElementById('cocktail-list')
+    listDiv.innerHTML = ''
     const ol = document.createElement('ol')
     for (const item of list.drinks) {
         console.log(item)
