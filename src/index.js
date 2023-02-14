@@ -113,14 +113,35 @@ function toggleRandomCocktail() {
 
 function search(term) {
     console.log(term)
+    let searchBy = ''
     if (!term.target[0].value) {
         alert('Please enter a search term')
     }
     else if (term.target[1].checked === true) {
+        searchBy = 'name'
+        console.log(searchBy)
 
     } else if (term.target[2].checked === true) {
-
+        searchBy = 'ingredient'
+        console.log(searchBy)
+        fetch(`${cocktailURL}filter.php?i=${term.target[0].value}`)
+            .then(resp => resp.json())
+            .then(data => renderCocktailList(data))
     } else {
         alert('Please choose either Name or Ingredient')
     }
+}
+
+function renderCocktailList(list) {
+    console.log(list)
+    const listDiv = document.getElementById('cocktail-list')
+    const ol = document.createElement('ol')
+    for (const item of list.drinks) {
+        console.log(item)
+        const li = document.createElement('li')
+        li.textContent = item.strDrink
+        li.style = 'text-align:left;'
+        ol.appendChild(li)
+    }
+    listDiv.appendChild(ol)
 }
