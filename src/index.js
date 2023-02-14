@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(data.drinks[0])
             renderDrink(data.drinks[0])
         })
+
+    const form = document.getElementById('form')
+    form.addEventListener('submit', event => {
+        event.preventDefault()
+        search(event);
+    })
 })
 
 function renderDrink(drink) {
@@ -45,11 +51,13 @@ function renderDrink(drink) {
 function enlarge(element) {
     const img = document.getElementById('drink-thumbnail')
     img.src = element.src.slice(0, -8)
+    img.style = 'position:absolute;top:0px;left:0px;'
 }
 
 function resize(element) {
     const img = document.getElementById('drink-thumbnail')
     img.src = `${element.src}/preview`
+    img.style = ''
 }
 
 function countIngredients(drink) {
@@ -83,4 +91,18 @@ function countMeasures(drink) {
         drink.strMeasure10
     ]
     return meaArr.filter(n => n != null)
+}
+
+function search(term) {
+    console.log(term)
+    if (!term.target[0].value) {
+        alert('Please enter a search term')
+    }
+    else if (term.target[1].checked === true) {
+
+    } else if (term.target[2].checked === true) {
+
+    } else {
+        alert('Please choose either Name or Ingredient')
+    }
 }
