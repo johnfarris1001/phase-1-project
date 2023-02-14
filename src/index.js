@@ -103,10 +103,10 @@ function toggleRandomCocktail() {
     const hideButton = document.getElementById('hide')
     if (!randomCocktail.style.display) {
         randomCocktail.style.display = 'none'
-        hideButton.textContent = 'Show Cocktail'
+        hideButton.textContent = 'Show Random Cocktail'
     } else {
         randomCocktail.style.display = ''
-        hideButton.textContent = 'Hide Cocktail'
+        hideButton.textContent = 'Hide Random Cocktail'
     }
 
 }
