@@ -1,10 +1,11 @@
 const cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/"
+let tableCount = 0
 
 document.addEventListener('DOMContentLoaded', () => {
     fetch(`${cocktailURL}random.php`)
         .then(resp => resp.json())
         .then(data => {
-            renderDrink(data.drinks[0])
+            renderDrink(data.drinks[0], 'random-cocktail', 'drink-thumbnail')
         })
 
     const hide = document.getElementById('hide')
@@ -19,11 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-function renderDrink(drink) {
+function renderDrink(drink, placement, imgId) {
     const ingredients = countIngredients(drink)
     const measures = countMeasures(drink)
 
-    const div = document.getElementById('random-cocktail')
+    const div = document.getElementById(placement)
     const img = document.createElement('img')
     const h3 = document.createElement('h3')
     const ing = document.createElement('p')
@@ -31,12 +32,12 @@ function renderDrink(drink) {
     const p = document.createElement('p')
     img.src = `${drink.strDrinkThumb}/preview`
     img.alt = 'Drink thumbnail'
-    img.id = 'drink-thumbnail'
+    img.id = imgId
     img.addEventListener('mouseover', event => {
-        enlarge(event.toElement)
+        enlarge(event.toElement, img.id)
     })
     img.addEventListener('mouseout', event => {
-        resize(event.fromElement)
+        resize(event.fromElement, img.id)
     })
     h3.textContent = `${drink.strDrink} (${drink.strAlcoholic})`
     p.textContent = drink.strInstructions
@@ -52,17 +53,18 @@ function renderDrink(drink) {
 
 }
 
-function enlarge(element) {
-    const img = document.getElementById('drink-thumbnail')
+function enlarge(element, id) {
+    const img = document.getElementById(id)
     img.src = element.src.slice(0, -8)
-    img.style = 'position:absolute;top:0px;left:0px;'
+    img.style = 'position:fixed;top:0px;left:0px;'
 }
 
-function resize(element) {
-    const img = document.getElementById('drink-thumbnail')
+function resize(element, id) {
+    const img = document.getElementById(id)
     img.src = `${element.src}/preview`
     img.style = ''
 }
+
 
 function countIngredients(drink) {
     const ingArr = [
@@ -145,6 +147,10 @@ function renderCocktailList(list) {
         const li = document.createElement('li')
         li.textContent = item.strDrink
         li.style = 'text-align:left;'
+        li.addEventListener('click', () => {
+            tableCount++
+            renderDrink(item, `t-${tableCount}`, `drink-${tableCount}`)
+        })
         ol.appendChild(li)
     }
     listDiv.appendChild(ol)
