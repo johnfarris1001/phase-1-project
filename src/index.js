@@ -1,5 +1,6 @@
 const cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/"
 let tableCount = 0
+const userList = []
 
 document.addEventListener('DOMContentLoaded', () => {
     fetch(`${cocktailURL}random.php`)
@@ -31,6 +32,7 @@ function renderDrink(drink, placement, imgId) {
     const h4 = document.createElement('h4')
     const ing = document.createElement('p')
     let ingList = ''
+    const btn = document.createElement('button')
     const p = document.createElement('p')
     img.src = `${drink.strDrinkThumb}/preview`
     img.alt = 'Drink thumbnail'
@@ -43,6 +45,14 @@ function renderDrink(drink, placement, imgId) {
     })
     h3.textContent = `${drink.strDrink} (${drink.strAlcoholic})`
     h4.textContent = drink.strGlass
+    btn.textContent = 'Add to List'
+    btn.addEventListener('click', () => {
+        if (!userList.includes(drink)) {
+            userList.push(drink)
+        } else {
+            alert('Drink already on List!')
+        }
+    })
     p.textContent = drink.strInstructions
     div.appendChild(img)
     div.appendChild(h3)
@@ -53,6 +63,7 @@ function renderDrink(drink, placement, imgId) {
     }
     ing.innerHTML = ingList
     div.appendChild(ing)
+    div.appendChild(btn)
     div.appendChild(p)
 
 }
