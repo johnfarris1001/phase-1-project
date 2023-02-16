@@ -38,3 +38,12 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
+
+th {
+    font-weight: normal;
+}
+
+#cocktail-list {
+    max-height: 110px;
+    overflow: scroll;
+}
