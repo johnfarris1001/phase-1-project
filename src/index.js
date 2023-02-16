@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(`${cocktailURL}random.php`)
         .then(resp => resp.json())
         .then(data => {
+            console.log(data)
             renderDrink(data.drinks[0], 'random-cocktail', 'drink-thumbnail')
         })
 
@@ -27,6 +28,7 @@ function renderDrink(drink, placement, imgId) {
     const div = document.getElementById(placement)
     const img = document.createElement('img')
     const h3 = document.createElement('h3')
+    const h4 = document.createElement('h4')
     const ing = document.createElement('p')
     let ingList = ''
     const p = document.createElement('p')
@@ -40,9 +42,11 @@ function renderDrink(drink, placement, imgId) {
         resize(event.fromElement, img.id)
     })
     h3.textContent = `${drink.strDrink} (${drink.strAlcoholic})`
+    h4.textContent = drink.strGlass
     p.textContent = drink.strInstructions
     div.appendChild(img)
     div.appendChild(h3)
+    div.appendChild(h4)
     for (let i = 0; i < ingredients.length; i++) {
         let measure = measures[i] ? measures[i] : ''
         ingList = ingList + `${measure} ${ingredients[i]}<br>`
@@ -149,7 +153,15 @@ function renderCocktailList(list) {
         li.style = 'text-align:left;'
         li.addEventListener('click', () => {
             tableCount++
-            renderDrink(item, `t-${tableCount}`, `drink-${tableCount}`)
+            if (item.strAlcoholic) {
+                renderDrink(item, `t-${tableCount}`, `drink-${tableCount}`)
+            } else {
+                fetch(`${cocktailURL}lookup.php?i=${item.idDrink}`)
+                    .then(resp => resp.json())
+                    .then(data => {
+                        renderDrink(data.drinks[0], `t-${tableCount}`, `drink-${tableCount}`)
+                    })
+            }
         })
         ol.appendChild(li)
     }
