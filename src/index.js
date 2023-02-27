@@ -1,6 +1,6 @@
 const cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/"
 let tableCount = 0
-const userList = []
+const compareList = []
 
 document.addEventListener('DOMContentLoaded', () => {
     fetch(`${cocktailURL}random.php`)
@@ -161,6 +161,7 @@ function renderCocktailList(list) {
         for (let i = 0; i < 9; i++) {
             document.getElementById(`t-${i + 1}`).innerHTML = ''
         }
+        document.getElementById('search-term').value = ''
         clear.remove()
     })
     listDiv.innerHTML = ''
