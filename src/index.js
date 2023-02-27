@@ -137,7 +137,6 @@ function search(term) {
         fetch(`${cocktailURL}search.php?s=${term.target[0].value}`)
             .then(resp => resp.json())
             .then(data => renderCocktailList(data))
-
     } else if (term.target[2].checked === true) {
         searchBy = 'ingredient'
         fetch(`${cocktailURL}filter.php?i=${term.target[0].value}`)
@@ -155,10 +154,18 @@ function renderCocktailList(list) {
         return
     }
     const listDiv = document.getElementById('cocktail-list')
+    const clear = document.createElement('button')
+    clear.textContent = 'Clear Results'
+    clear.addEventListener('click', () => {
+        listDiv.innerHTML = ''
+        for (let i = 0; i < 9; i++) {
+            document.getElementById(`t-${i + 1}`).innerHTML = ''
+        }
+        clear.remove()
+    })
     listDiv.innerHTML = ''
     const ol = document.createElement('ol')
     for (const item of list.drinks) {
-        console.log(item)
         const li = document.createElement('li')
         li.textContent = item.strDrink
         li.style = 'text-align:left;'
@@ -176,5 +183,7 @@ function renderCocktailList(list) {
         })
         ol.appendChild(li)
     }
+    document.getElementById('search-box').appendChild(clear)
     listDiv.appendChild(ol)
+
 }
