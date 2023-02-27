@@ -15,6 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleRandomCocktail()
     })
 
+    const list = document.getElementById('show-list')
+    list.addEventListener('click', () => {
+        if (compareList.length === 0) {
+            alert('Your Compare List is Empty!\nAdd Cocktails to Your List')
+        }
+        console.log(compareList)
+    })
+
     const form = document.getElementById('form')
     form.addEventListener('submit', event => {
         event.preventDefault()
