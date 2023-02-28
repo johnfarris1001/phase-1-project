@@ -43,7 +43,7 @@ th {
     font-weight: normal;
 }
 
-#cocktail-list {
+#scroll-list {
     max-height: 110px;
     overflow: scroll;
 }

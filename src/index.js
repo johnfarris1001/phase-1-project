@@ -1,6 +1,7 @@
 const cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/"
 let tableCount = 0
 const compareList = []
+let listToggle = false
 
 document.addEventListener('DOMContentLoaded', () => {
     fetch(`${cocktailURL}random.php`)
@@ -19,8 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
     list.addEventListener('click', () => {
         if (compareList.length === 0) {
             alert('Your Compare List is Empty!\nAdd Cocktails to Your List')
+        } else {
+            listToggle = !listToggle
+            if (listToggle) {
+                list.textContent = 'Hide Your Compare List'
+                toggleSearch(true)
+            } else {
+                list.textContent = 'Show Your Compare List'
+                toggleSearch(false)
+            }
         }
-        console.log(compareList)
     })
 
     const form = document.getElementById('form')
@@ -55,8 +64,9 @@ function renderDrink(drink, placement, imgId) {
     h4.textContent = drink.strGlass
     btn.textContent = 'Add to List'
     btn.addEventListener('click', () => {
-        if (!userList.includes(drink)) {
-            userList.push(drink)
+        if (!compareList.includes(drink)) {
+            compareList.push(drink)
+            console.log(compareList)
         } else {
             alert('Drink already on List!')
         }
@@ -88,38 +98,22 @@ function resize(element, id) {
     img.style = ''
 }
 
-
-function countIngredients(drink) {
-    const ingArr = [
-        drink.strIngredient1,
-        drink.strIngredient2,
-        drink.strIngredient3,
-        drink.strIngredient4,
-        drink.strIngredient5,
-        drink.strIngredient6,
-        drink.strIngredient7,
-        drink.strIngredient8,
-        drink.strIngredient9,
-        drink.strIngredient10
-    ]
-
-    return ingArr.filter(n => n != null)
-}
-
-function countMeasures(drink) {
-    const meaArr = [
-        drink.strMeasure1,
-        drink.strMeasure2,
-        drink.strMeasure3,
-        drink.strMeasure4,
-        drink.strMeasure5,
-        drink.strMeasure6,
-        drink.strMeasure7,
-        drink.strMeasure8,
-        drink.strMeasure9,
-        drink.strMeasure10
-    ]
-    return meaArr.filter(n => n != null)
+function toggleSearch(visible) {
+    const randomDiv = document.getElementById('random-div')
+    const searchDiv = document.getElementById('search-box')
+    const cocktailListDiv = document.getElementById('cocktail-list')
+    const infoDiv = document.getElementById('information')
+    if (visible) {
+        randomDiv.style.display = 'none'
+        searchDiv.style.display = 'none'
+        cocktailListDiv.style.display = 'none'
+        infoDiv.style.display = 'none'
+    } else {
+        randomDiv.style.display = ''
+        searchDiv.style.display = ''
+        cocktailListDiv.style.display = ''
+        infoDiv.style.display = ''
+    }
 }
 
 function toggleRandomCocktail() {
@@ -174,6 +168,9 @@ function renderCocktailList(list) {
     })
     listDiv.innerHTML = ''
     const ol = document.createElement('ol')
+    ol.id = 'scroll-list'
+    const p = document.createElement('p')
+    p.textContent = 'Click on a drink to see details. (List is scrollable)'
     for (const item of list.drinks) {
         const li = document.createElement('li')
         li.textContent = item.strDrink
@@ -193,6 +190,41 @@ function renderCocktailList(list) {
         ol.appendChild(li)
     }
     document.getElementById('search-box').appendChild(clear)
+    listDiv.appendChild(p)
     listDiv.appendChild(ol)
 
+}
+
+
+function countIngredients(drink) {
+    const ingArr = [
+        drink.strIngredient1,
+        drink.strIngredient2,
+        drink.strIngredient3,
+        drink.strIngredient4,
+        drink.strIngredient5,
+        drink.strIngredient6,
+        drink.strIngredient7,
+        drink.strIngredient8,
+        drink.strIngredient9,
+        drink.strIngredient10
+    ]
+
+    return ingArr.filter(n => n != null)
+}
+
+function countMeasures(drink) {
+    const meaArr = [
+        drink.strMeasure1,
+        drink.strMeasure2,
+        drink.strMeasure3,
+        drink.strMeasure4,
+        drink.strMeasure5,
+        drink.strMeasure6,
+        drink.strMeasure7,
+        drink.strMeasure8,
+        drink.strMeasure9,
+        drink.strMeasure10
+    ]
+    return meaArr.filter(n => n != null)
 }
