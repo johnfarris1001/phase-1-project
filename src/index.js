@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('form')
     form.addEventListener('submit', event => {
         event.preventDefault()
+        if (document.getElementById('clear')) {
+            document.getElementById('clear').remove()
+        }
         search(event);
     })
 })
@@ -74,7 +77,9 @@ function renderDrink(drink, placement, imgId, forList) {
         }
     })
     p.textContent = drink.strInstructions
-    div.appendChild(img)
+    if (!forList) {
+        div.appendChild(img)
+    }
     div.appendChild(h3)
     div.appendChild(h4)
     for (let i = 0; i < ingredients.length; i++) {
@@ -85,8 +90,8 @@ function renderDrink(drink, placement, imgId, forList) {
     div.appendChild(ing)
     if (!forList) {
         div.appendChild(btn)
+        div.appendChild(p)
     }
-    div.appendChild(p)
 
 }
 
@@ -167,6 +172,7 @@ function renderCocktailList(list) {
     const listDiv = document.getElementById('cocktail-list')
     const clear = document.createElement('button')
     clear.textContent = 'Clear Results'
+    clear.id = 'clear'
     clear.addEventListener('click', () => {
         listDiv.innerHTML = ''
         for (let i = 0; i < 9; i++) {
