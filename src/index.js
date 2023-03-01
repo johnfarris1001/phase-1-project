@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(resp => resp.json())
         .then(data => {
             console.log(data)
-            renderDrink(data.drinks[0], 'random-cocktail', 'drink-thumbnail')
+            renderDrink(data.drinks[0], 'random-cocktail', 'drink-thumbnail', false)
         })
 
     const hide = document.getElementById('hide')
@@ -25,9 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (listToggle) {
                 list.textContent = 'Hide Your Compare List'
                 toggleSearch(true)
+                showCompareList()
             } else {
                 list.textContent = 'Show Your Compare List'
                 toggleSearch(false)
+                document.getElementById('compare-list').innerHTML = ''
             }
         }
     })
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-function renderDrink(drink, placement, imgId) {
+function renderDrink(drink, placement, imgId, forList) {
     const ingredients = countIngredients(drink)
     const measures = countMeasures(drink)
 
@@ -81,21 +83,11 @@ function renderDrink(drink, placement, imgId) {
     }
     ing.innerHTML = ingList
     div.appendChild(ing)
-    div.appendChild(btn)
+    if (!forList) {
+        div.appendChild(btn)
+    }
     div.appendChild(p)
 
-}
-
-function enlarge(element, id) {
-    const img = document.getElementById(id)
-    img.src = element.src.slice(0, -8)
-    img.style = 'position:fixed;top:0px;left:0px;'
-}
-
-function resize(element, id) {
-    const img = document.getElementById(id)
-    img.src = `${element.src}/preview`
-    img.style = ''
 }
 
 function toggleSearch(visible) {
@@ -114,6 +106,23 @@ function toggleSearch(visible) {
         cocktailListDiv.style.display = ''
         infoDiv.style.display = ''
     }
+}
+
+function showCompareList() {
+    const currentList = compareList.map(x => renderDrink(x, 'compare-list', 'drink-thumbnail', true))
+    console.log(currentList)
+}
+
+function enlarge(element, id) {
+    const img = document.getElementById(id)
+    img.src = element.src.slice(0, -8)
+    img.style = 'position:fixed;top:0px;left:0px;'
+}
+
+function resize(element, id) {
+    const img = document.getElementById(id)
+    img.src = `${element.src}/preview`
+    img.style = ''
 }
 
 function toggleRandomCocktail() {
