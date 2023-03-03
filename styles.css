@@ -47,3 +47,14 @@ th {
     max-height: 110px;
     overflow: scroll;
 }
+
+.container {
+    display: flex;
+    vertical-align: middle;
+    width: 100vw;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 200px;
+}

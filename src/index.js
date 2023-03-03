@@ -47,15 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderDrink(drink, placement, imgId, forList) {
     const ingredients = countIngredients(drink)
     const measures = countMeasures(drink)
+    let ingList = ''
 
     const div = document.getElementById(placement)
+    const container = document.createElement('div')
     const img = document.createElement('img')
     const h3 = document.createElement('h3')
     const h4 = document.createElement('h4')
     const ing = document.createElement('p')
-    let ingList = ''
     const btn = document.createElement('button')
     const p = document.createElement('p')
+
     img.src = `${drink.strDrinkThumb}/preview`
     img.alt = 'Drink thumbnail'
     img.id = imgId
@@ -78,21 +80,24 @@ function renderDrink(drink, placement, imgId, forList) {
     })
     p.textContent = drink.strInstructions
     if (!forList) {
-        div.appendChild(img)
+        container.appendChild(img)
     }
-    div.appendChild(h3)
-    div.appendChild(h4)
+    container.appendChild(h3)
+    container.appendChild(h4)
     for (let i = 0; i < ingredients.length; i++) {
         let measure = measures[i] ? measures[i] : ''
         ingList = ingList + `${measure} ${ingredients[i]}<br>`
     }
     ing.innerHTML = ingList
-    div.appendChild(ing)
+    container.appendChild(ing)
     if (!forList) {
-        div.appendChild(btn)
-        div.appendChild(p)
+        container.appendChild(btn)
+        container.appendChild(p)
     }
-
+    if (forList) {
+        container.className = 'card'
+    }
+    div.appendChild(container)
 }
 
 function toggleSearch(visible) {
@@ -180,6 +185,7 @@ function renderCocktailList(list) {
         }
         document.getElementById('search-term').value = ''
         clear.remove()
+        tableCount = 0
     })
     listDiv.innerHTML = ''
     const ol = document.createElement('ol')
