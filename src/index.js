@@ -141,7 +141,7 @@ function showCompareList() {
 function enlarge(element, id) {
     const img = document.getElementById(id)
     img.src = element.src.slice(0, -8)
-    img.style = 'position:fixed;top:0px;left:0px;'
+    img.style = 'position:fixed; top:0px; left:0px;'
 }
 
 function resize(element, id) {
