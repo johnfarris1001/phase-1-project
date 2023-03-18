@@ -1,6 +1,6 @@
 const cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1/"
 let tableCount = 0
-const compareList = []
+let compareList = []
 let listToggle = false
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -57,6 +57,7 @@ function renderDrink(drink, placement, imgId, forList) {
     const ing = document.createElement('p')
     const btn = document.createElement('button')
     const p = document.createElement('p')
+    const remove = document.createElement('button')
 
     img.src = `${drink.strDrinkThumb}/preview`
     img.alt = 'Drink thumbnail'
@@ -78,6 +79,16 @@ function renderDrink(drink, placement, imgId, forList) {
             alert('Drink already on List!')
         }
     })
+    remove.textContent = 'Remove'
+    remove.addEventListener('click', event => {
+        for (let i = 0; i < compareList.length; i++) {
+            console.log(drink.idDrink === compareList[i].idDrink)
+        }
+        compareList = compareList.filter(element => element.idDrink !== drink.idDrink)
+        document.getElementById('compare-list').innerHTML = ''
+        showCompareList()
+    }
+    )
     p.textContent = drink.strInstructions
     if (!forList) {
         container.appendChild(img)
@@ -96,6 +107,7 @@ function renderDrink(drink, placement, imgId, forList) {
     }
     if (forList) {
         container.className = 'card'
+        container.appendChild(remove)
     }
     div.appendChild(container)
 }
@@ -120,7 +132,7 @@ function toggleSearch(visible) {
 
 function showCompareList() {
     const currentList = compareList.map(x => renderDrink(x, 'compare-list', 'drink-thumbnail', true))
-    console.log(currentList)
+    console.log(compareList)
 }
 
 function enlarge(element, id) {
