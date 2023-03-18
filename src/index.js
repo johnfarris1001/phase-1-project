@@ -81,12 +81,13 @@ function renderDrink(drink, placement, imgId, forList) {
     })
     remove.textContent = 'Remove'
     remove.addEventListener('click', event => {
-        for (let i = 0; i < compareList.length; i++) {
-            console.log(drink.idDrink === compareList[i].idDrink)
-        }
         compareList = compareList.filter(element => element.idDrink !== drink.idDrink)
         document.getElementById('compare-list').innerHTML = ''
         showCompareList()
+        if (compareList.length === 0) {
+            toggleSearch(false)
+            document.getElementById('show-list').textContent = 'Show Your Compare List'
+        }
     }
     )
     p.textContent = drink.strInstructions
