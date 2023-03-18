@@ -2,7 +2,7 @@
 
 ## Description
 
-This single page application uses the free API at [TheCocktailDB](www.thecocktaildb.com/api.php).  It will show users a random cocktail, allow users to search based on ingredient or name, show full details of a cocktail, and allow users to save cocktails to a list.  The list can be used to compare ingredients needed for each cocktail.
+This single page application uses the free API at [TheCocktailDB](https://www.thecocktaildb.com/api.php).  It will show users a random cocktail, allow users to search based on ingredient or name, show full details of a cocktail, and allow users to save cocktails to a list.  The list can be used to compare ingredients needed for each cocktail.
 
 ### Features:
 
