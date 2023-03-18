@@ -2,7 +2,7 @@
 
 ## Description
 
-This single page application uses the free API at [TheCocktailDB](www.thecocktaildb.com/api.php).  It will show users a random cocktail, allow users to search based on ingredient or name, show full details of a cocktail, and allow users to save cocktails to a list.
+This single page application uses the free API at [TheCocktailDB](www.thecocktaildb.com/api.php).  It will show users a random cocktail, allow users to search based on ingredient or name, show full details of a cocktail, and allow users to save cocktails to a list.  The list can be used to compare ingredients needed for each cocktail.
 
 ### Features:
 
@@ -13,3 +13,4 @@ This single page application uses the free API at [TheCocktailDB](www.thecocktai
 5. Enlarge a thumbnail on mouseover (mouseover event listener)
 6. Resize image back to thumbnail size when the mouse leaves the image (mouseout event listener)
 7. Show details for all drinks in a list (map function)
+8. Remove cocktail from list (filter function)

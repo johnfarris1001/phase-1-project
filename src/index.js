@@ -104,12 +104,14 @@ function renderDrink(drink, placement, imgId, forList) {
     container.appendChild(ing)
     if (!forList) {
         container.appendChild(btn)
-        container.appendChild(p)
     }
+
+
     if (forList) {
         container.className = 'card'
         container.appendChild(remove)
     }
+    container.appendChild(p)
     div.appendChild(container)
 }
 
