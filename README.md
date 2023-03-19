@@ -14,3 +14,7 @@ This single page application uses the free API at [TheCocktailDB](https://www.th
 6. Resize image back to thumbnail size when the mouse leaves the image (mouseout event listener)
 7. Show details for all drinks in a list (map function)
 8. Remove cocktail from list (filter function)
+
+### Video Walkthrough Link:
+
+[Link](https://youtu.be/B8-xm3nNt8I)
