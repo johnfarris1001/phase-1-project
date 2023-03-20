@@ -15,6 +15,7 @@ This single page application uses the free API at [TheCocktailDB](https://www.th
 7. Show details for all drinks in a list (map function)
 8. Remove cocktail from list (filter function)
 
-### Video Walkthrough Link:
+### Links:
 
-[Link](https://youtu.be/B8-xm3nNt8I)
+[Video Walkthrough](https://youtu.be/B8-xm3nNt8I)
+[Blog Post](https://medium.com/@johnfarris217/accessing-user-submitted-information-in-html-forms-55c8220e13fc)
