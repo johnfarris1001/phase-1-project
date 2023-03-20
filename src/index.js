@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(`${cocktailURL}random.php`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
             renderDrink(data.drinks[0], 'random-cocktail', 'drink-thumbnail', false)
         })
 
