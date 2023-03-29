@@ -4,17 +4,20 @@ let compareList = []
 let listToggle = false
 
 document.addEventListener('DOMContentLoaded', () => {
+    //get random cocktail
     fetch(`${cocktailURL}random.php`)
         .then(resp => resp.json())
         .then(data => {
             renderDrink(data.drinks[0], 'random-cocktail', 'drink-thumbnail', false)
         })
 
+    //show or hide random cocktail
     const hide = document.getElementById('hide')
     hide.addEventListener('click', () => {
         toggleRandomCocktail()
     })
 
+    //show or hide compare list
     const list = document.getElementById('show-list')
     list.addEventListener('click', () => {
         if (compareList.length === 0) {
@@ -33,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    //handle search form submit
     const form = document.getElementById('form')
     form.addEventListener('submit', event => {
         event.preventDefault()
@@ -42,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         search(event);
     })
 })
+
 
 function renderDrink(drink, placement, imgId, forList) {
     const ingredients = countIngredients(drink)
@@ -73,7 +78,6 @@ function renderDrink(drink, placement, imgId, forList) {
     btn.addEventListener('click', () => {
         if (!compareList.includes(drink)) {
             compareList.push(drink)
-            console.log(compareList)
         } else {
             alert('Drink already on List!')
         }
@@ -103,17 +107,16 @@ function renderDrink(drink, placement, imgId, forList) {
     container.appendChild(ing)
     if (!forList) {
         container.appendChild(btn)
-    }
-
-
-    if (forList) {
+    } else {
         container.className = 'card'
         container.appendChild(remove)
     }
+
     container.appendChild(p)
     div.appendChild(container)
 }
 
+//logic to show and hide compare list
 function toggleSearch(visible) {
     const randomDiv = document.getElementById('random-div')
     const searchDiv = document.getElementById('search-box')
@@ -134,9 +137,9 @@ function toggleSearch(visible) {
 
 function showCompareList() {
     const currentList = compareList.map(x => renderDrink(x, 'compare-list', 'drink-thumbnail', true))
-    console.log(compareList)
 }
 
+//enlarge and shrink imanges on mouseover and mouseout
 function enlarge(element, id) {
     const img = document.getElementById(id)
     img.src = element.src.slice(0, -8)
@@ -230,7 +233,7 @@ function renderCocktailList(list) {
 
 }
 
-
+//logic to take ingredient list form api and transform it into a useable form
 function countIngredients(drink) {
     const ingArr = [
         drink.strIngredient1,
