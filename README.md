@@ -6,14 +6,14 @@ This single page application uses the free API at [TheCocktailDB](https://www.th
 
 ### Features:
 
-1. Show a random cocktail on initial page load
-2. Show a list of cocktails based on a chosen ingedient (submit event listener)
-3. Show details of a cocktail when it is clicked on (click event listener)
-4. Allow users to save and display a list of cocktails
-5. Enlarge a thumbnail on mouseover (mouseover event listener)
-6. Resize image back to thumbnail size when the mouse leaves the image (mouseout event listener)
-7. Show details for all drinks in a list (map function)
-8. Remove cocktail from list (filter function)
+1. Click on the 'Show Random Cocktail' button to see your random cocktail.  Click on the button again to hide it.
+2. Enter either a name or ingredient into the search bar.  Choose whether to search by name or ingredient and hit 'Submit'
+3. Click on the names of cocktails that you're interested in to see the details of those cocktails.  
+4.  Click 'Add to List' to add it to your list of cocktails to compare.  
+5.  Click 'Clear Results' to clear out the cocktails you have pulled up.
+6. After you have added cocktails to your list, click 'Show Your Compare List' to compare all the cocktails on your list.  Scroll through the information on each cocktail.
+7. Click 'Remove' to remove a cocktail from your compare list.
+8. Mouse-over any image to see a larger version of the image.
 
 ### Links:
 

@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             listToggle = !listToggle
             if (listToggle) {
+                let x = 1;
                 list.textContent = 'Hide Your Compare List'
                 toggleSearch(true)
                 showCompareList()
@@ -34,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('compare-list').innerHTML = ''
             }
         }
+
+
+
     })
 
     //handle search form submit
@@ -174,7 +178,9 @@ function search(term) {
         searchBy = 'name'
         fetch(`${cocktailURL}search.php?s=${term.target[0].value}`)
             .then(resp => resp.json())
-            .then(data => renderCocktailList(data))
+            .then(data => {
+                renderCocktailList(data)
+            })
     } else if (term.target[2].checked === true) {
         searchBy = 'ingredient'
         fetch(`${cocktailURL}filter.php?i=${term.target[0].value}`)
